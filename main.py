@@ -4,9 +4,10 @@ from tkinter import messagebox
 
 class habilidade:
 
-    def __init__(self, master, nome):
+    def __init__(self, master, nome, ganho):
         self.nome = nome
         self.master = master
+        self.ganho = ganho
 
         self.frameHabilidade = ttk.Frame(master, padding = 15, width= 100)
         self.frameHabilidade.pack()
@@ -24,14 +25,16 @@ class habilidade:
     def incrementar(self):
         if self.barra["value"] < self.barra["maximum"]:
             self.barra["value"] += 1
-            # Usamos o self.master (que é o root) para chamar o after
             self.master.after(50, self.incrementar)
         else:
             self.barra["value"] = 0
             self.comando_final()
 
     def comando_final(self):
-        messagebox.showinfo("Fim", "O comando foi executado com sucesso!")
+        global aura
+        aura.set(aura.get() + self.ganho)
+
+
 
 root = Tk()
 root.title("simulador de farmar aura")
@@ -46,11 +49,17 @@ frame1.pack(pady=20, padx=20, fill="both", expand=False)
 contadorAura = ttk.Label(frame1, text="0", font=("Comic Sans MS", 20))
 contadorAura.place(relx=1.0, rely=0, anchor='ne')
 
+def AtualizarLabelAura(name, index, mode):
+    global aura
+    contadorAura["text"] = aura.get()
+
+aura.trace_add("write", AtualizarLabelAura)
+
 # frame das habilidades
 frame2 = ttk.Frame(root, padding = 20, relief="solid", width=500)
 frame2.pack()
 
-habilidade1 = habilidade(frame2, "tocar phonk \nem publico")
-habilidade2 = habilidade(frame2, "moggar 1 beta")
+habilidade1 = habilidade(frame2, "moggar 1 beta", 1)
+habilidade2 = habilidade(frame2, "tocar phonk \nem publico", 3)
 
 root.mainloop()
