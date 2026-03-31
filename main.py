@@ -4,15 +4,20 @@ from tkinter import messagebox
 
 class habilidade:
 
-    def __init__(self, master, nome, ganho):
+    def __init__(self, master, nome, ganho, tempoEspera):
+        """
+        tempoEspera: tempo em décimos de segundo para a duração da barra da habilidade
+        """
+
         self.nome = nome
         self.master = master
         self.ganho = ganho
+        self.tempoEspera = tempoEspera
 
         self.frameHabilidade = ttk.Frame(master, padding = 15, width= 100)
         self.frameHabilidade.pack()
         
-        self.barra = ttk.Progressbar(self.frameHabilidade, orient= "horizontal", length= 300, mode = "determinate", maximum=30)
+        self.barra = ttk.Progressbar(self.frameHabilidade, orient= "horizontal", length= 300, mode = "determinate", maximum= tempoEspera)
         self.barra.pack(side='right')
 
         self.botao = Button(self.frameHabilidade, text= self.nome, command= self.iniciar_progresso, width= "15", font= ("Arial", 12))
@@ -59,7 +64,7 @@ aura.trace_add("write", AtualizarLabelAura)
 frame2 = ttk.Frame(root, padding = 20, relief="solid", width=500)
 frame2.pack()
 
-habilidade1 = habilidade(frame2, "moggar 1 beta", 1)
-habilidade2 = habilidade(frame2, "tocar phonk \nem publico", 3)
+habilidade1 = habilidade(master= frame2, nome="moggar 1 beta", ganho= 1, tempoEspera= 30)
+habilidade2 = habilidade(master= frame2, nome= "tocar phonk \nem publico", ganho= 3, tempoEspera= 50)
 
 root.mainloop()
