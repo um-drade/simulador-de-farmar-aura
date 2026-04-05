@@ -56,8 +56,9 @@ root.geometry("500x500")
 aura = IntVar(root, value = 0)
 
 # Header
-frame1 = ttk.Frame(root,width=500, height=100, relief="solid")
-frame1.pack(pady=20, padx=20, fill="x", expand=False)
+frame1 = ttk.Frame(root, height=200, relief="solid")
+frame1.pack(pady=20, padx=20, fill="x")
+frame1.pack_propagate(False)
 
 contadorAura = ttk.Label(frame1, text="0", font=("Comic Sans MS", 20))
 contadorAura.place(relx=1.0, rely=0, anchor='ne')
@@ -72,7 +73,7 @@ aura.trace_add("write", AtualizarLabelAura)
 frame2 = ttk.Frame(root, padding = 20, relief="solid", width=500)
 frame2.pack()
 
-habilidade1 = habilidade(master= frame2, nome="moggar 1 beta", ganho= 1, tempoEspera= 20)
+habilidade1 = habilidade(master= frame2, nome="moggar 1 betinha", ganho= 1, tempoEspera= 20)
 
 habilidade2 = habilidade(master= frame2, nome= "tocar phonk \nem publico", ganho= 3, tempoEspera= 40)
 
